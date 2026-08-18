@@ -1,25 +1,31 @@
 import HomePage from "../components/pages/Home";
 import LoginPage from "../components/pages/Login";
 import MainLayout from "../components/layout/MainLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 const routes = [
   {
-    path: "/",
-    element: <MainLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
+        path: "/",
+        element: <MainLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: "archived",
+            element: <HomePage />,
+          },
+        ],
       },
       {
-        path: "/archived",
-        element: <HomePage />,
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
   },
 ];
 

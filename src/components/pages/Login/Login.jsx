@@ -3,12 +3,31 @@ import logo from "../../../assets/images/logo.svg";
 import googleIcon from "../../../assets/images/icon-google.svg";
 import hidePasswordIcon from "../../../assets/images/icon-hide-password.svg";
 import showPasswordIcon from "../../../assets/images/icon-show-password.svg";
-
+import { supabase } from "../../../utils/supabase";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+
+    navigate("/");
+  };
 
   return (
     <div className={loginStyles.container}>
@@ -19,10 +38,7 @@ export default function Login() {
           <p className={loginStyles.subtitle}>Please log in to continue</p>
         </div>
         <div className={loginStyles.form}>
-          <form
-            className={loginStyles.loginForm}
-            onSubmit={(e) => e.preventDefault()}
-          >
+          <form className={loginStyles.loginForm} onSubmit={handleLogin}>
             <div className={loginStyles.inputGroup}>
               <label htmlFor="email">Email Address</label>
               <input
@@ -30,6 +46,8 @@ export default function Login() {
                 id="email"
                 name="email"
                 placeholder="email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
