@@ -1,9 +1,12 @@
 .mainLayout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   border-left: 1px solid #e5e5e5;
   width: 100%;
 }

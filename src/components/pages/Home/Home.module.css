@@ -1,5 +1,6 @@
 .container {
-  padding: 20px 24px;
+  display: flex;
+  height: 100vh;
 }
 
 .createNoteBtn {
@@ -9,4 +10,80 @@
   padding: 12px 16px;
   color: white;
   width: 242px;
+}
+
+.noteSidebar {
+  padding: 20px 24px;
+  border-right: 1px solid #e5e5e5;
+  flex: 1;
+}
+
+.noteEditor {
+  display: flex;
+  flex: 5;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px;
+  border-right: 1px solid #e5e5e5;
+}
+
+.noteEditor input,
+.noteEditor textarea {
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.noteTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.metaData {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-block: 16px;
+  border-bottom: 1px solid #e0e4ea;
+}
+
+.metaRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+}
+
+.metaLabel {
+  color: #2b303b;
+}
+
+.noteContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.noteActionSidebar {
+  flex: 1;
+}
+
+.noteActions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  padding-top: 16px;
+  border-top: 1px solid #e0e4ea;
+}
+
+.noteActions button {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+.saveButton {
+  background-color: #335cff;
+  color: white;
+}
+
+.cancelButton {
+  background-color: #f3f5f8;
 }
