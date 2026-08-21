@@ -1,21 +1,16 @@
+/* ================================
+   Layout
+================================ */
+
 .container {
   display: flex;
   height: 100vh;
 }
 
-.createNoteBtn {
-  background-color: #335cff;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: white;
-  width: 242px;
-}
-
 .noteSidebar {
+  flex: 1;
   padding: 20px 24px;
   border-right: 1px solid #e5e5e5;
-  flex: 1;
 }
 
 .noteEditor {
@@ -27,6 +22,14 @@
   border-right: 1px solid #e5e5e5;
 }
 
+.noteActionSidebar {
+  flex: 1;
+}
+
+/* ================================
+   General Editor Styles
+================================ */
+
 .noteEditor input,
 .noteEditor textarea {
   border: none;
@@ -34,10 +37,35 @@
   resize: none;
 }
 
+/* ================================
+   Create Note Button
+================================ */
+
+.createNoteBtn {
+  width: 242px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #335cff;
+  color: white;
+}
+
+/* ================================
+   Note Information
+================================ */
+
 .noteTitle {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
+.noteTitle::placeholder {
+  color: #0e121b;
+}
+
+/* ================================
+   Metadata
+================================ */
 
 .metaData {
   display: flex;
@@ -50,20 +78,43 @@
 .metaRow {
   display: grid;
   grid-template-columns: 120px 1fr;
+  gap: 20px;
 }
 
 .metaLabel {
+  display: flex;
+  gap: 8px;
   color: #2b303b;
 }
+
+.metaLabel img {
+  width: 16px;
+}
+
+.tagsInput::placeholder {
+  color: #99a0ae;
+}
+
+.editStatus {
+  color: #99a0ae;
+}
+
+/* ================================
+   Note Content
+================================ */
 
 .noteContent {
   flex: 1;
   overflow-y: auto;
 }
 
-.noteActionSidebar {
-  flex: 1;
+.noteContent::placeholder {
+  color: #2b303b;
 }
+
+/* ================================
+   Note Actions
+================================ */
 
 .noteActions {
   display: flex;
@@ -75,8 +126,8 @@
 
 .noteActions button {
   padding: 12px 16px;
-  border-radius: 8px;
   border: none;
+  border-radius: 8px;
 }
 
 .saveButton {
@@ -86,4 +137,33 @@
 
 .cancelButton {
   background-color: #f3f5f8;
+}
+
+/* ================================
+   Note List
+================================ */
+
+.noteList {
+  margin-top: 4px;
+}
+
+.noteItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-block: 12px;
+  border-bottom: 1px solid #e0e4ea;
+}
+
+.noteItemTags {
+  display: flex;
+  gap: 4px;
+}
+
+.noteTags {
+  font-family: sans-serif;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #e0e4ea;
 }

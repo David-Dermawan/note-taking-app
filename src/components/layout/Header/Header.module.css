@@ -13,7 +13,8 @@
 
 .searchBar {
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 25px;
   max-width: 358px;
   width: 100%;
 
