@@ -2,6 +2,7 @@ import { Outlet, useMatches } from "react-router";
 import Header from "../Header";
 import Navbar from "../Navbar";
 import styles from "./MainLayout.module.css";
+import MobileNavbar from "../MobileNavbar/MobileNavbar";
 
 export default function MainLayout() {
   const matches = useMatches();
@@ -11,7 +12,7 @@ export default function MainLayout() {
 
   return (
     <div className={styles.mainLayout}>
-      <Navbar />
+      <MobileNavbar />
       <div className={styles.content}>
         <Header title={title} />
         <Outlet />

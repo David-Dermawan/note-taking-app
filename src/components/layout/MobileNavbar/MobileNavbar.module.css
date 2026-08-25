@@ -1,0 +1,32 @@
+.navigation {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 32px;
+  background-color: #fff;
+  box-shadow: 0 -4px 6px rgba(240, 240, 240, 0.6);
+}
+
+.navList {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.item {
+  list-style-type: none;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #717784;
+
+  img {
+    width: 24px;
+  }
+}
