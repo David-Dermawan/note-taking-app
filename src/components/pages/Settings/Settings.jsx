@@ -1,4 +1,4 @@
-import settingStyles from "./Settings.module.css";
+import styles from "./Settings.module.css";
 import sunIcon from "../../../assets/images/icon-sun.svg";
 import fontIcon from "../../../assets/images/icon-font.svg";
 import lockIcon from "../../../assets/images/icon-lock.svg";
@@ -7,9 +7,9 @@ import { Link, Outlet } from "react-router";
 
 export default function Settings() {
   return (
-    <div className={settingStyles.container}>
-      <div className={settingStyles.settingsPanel}>
-        <ul className={settingStyles.settingsMenu}>
+    <div className={styles.container}>
+      <div className={styles.settingsPanel}>
+        <ul className={styles.settingsMenu}>
           <li>
             <Link to="/settings/password">
               <img src={sunIcon} alt="Sun Icon" />

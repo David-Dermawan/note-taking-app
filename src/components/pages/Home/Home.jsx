@@ -1,10 +1,13 @@
-import homeStyles from "./Home.module.css";
+import styles from "./Home.module.css";
 import tagIcon from "../../../assets/images/icon-tag.svg";
 import clockIcon from "../../../assets/images/icon-clock.svg";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase";
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import { useOutletContext } from "react-router";
 
 export default function Home() {
+  const { title, isSearchOpen, isTagView } = useOutletContext();
   const [isCreating, setIsCreating] = useState(false);
   const [note, setNote] = useState({
     title: "",
@@ -15,6 +18,7 @@ export default function Home() {
 
   const [selectedNote, setSelectedNote] = useState(null);
   const [noteList, setNoteList] = useState([]);
+  const isTablet = useMediaQuery("(max-width: 1024px)");
 
   function formatDate(date) {
     return new Date(date).toLocaleDateString("en-GB", {
@@ -135,109 +139,159 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={homeStyles.container}>
-      <div className={homeStyles.noteSidebar}>
-        <button
-          onClick={createNewNote}
-          type="button"
-          className={homeStyles.createNoteBtn}
-        >
-          + Create New Note
-        </button>
-        <div className={homeStyles.noteList}>
-          {noteList.map((note) => (
-            <div
-              key={note.id}
-              className={homeStyles.noteItem}
-              onClick={() => selectNote(note)}
+    <div className={styles.container}>
+      {(!isTablet || (!selectedNote && !isCreating)) && (
+        <div className={styles.noteSidebar}>
+          {!isTablet && (
+            <button
+              onClick={createNewNote}
+              type="button"
+              className={styles.createNoteBtn}
             >
-              <h3 className={homeStyles.noteItemTitle}>
-                {note.title || "Untitled Note"}
-              </h3>
-              <p className={homeStyles.noteItemTags}>
-                {note.tags.map((tag) => (
-                  <span key={tag} className={homeStyles.noteTags}>
-                    {tag}
-                  </span>
-                ))}
-              </p>
-              <p className={homeStyles.noteItemDate}>
-                {formatDate(note.last_edited)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={homeStyles.noteEditor}>
-        {selectedNote || isCreating ? (
-          <>
-            <div className={homeStyles.noteInfo}>
+              + Create New Note
+            </button>
+          )}
+          {isTablet && !isSearchOpen ? (
+            <h2 className={styles.noteListTitle}>{title}</h2>
+          ) : (
+            <div className={styles.searchBar}>
               <input
-                type="text"
-                placeholder="Enter a title..."
-                className={homeStyles.noteTitle}
-                value={note.title}
-                onChange={(e) => setNote({ ...note, title: e.target.value })}
+                type="search"
+                placeholder="Search by title, content, or tags..."
               />
+            </div>
+          )}
+          <div className={styles.noteList}>
+            {noteList.map((note) => (
+              <div
+                key={note.id}
+                className={styles.noteItem}
+                onClick={() => selectNote(note)}
+              >
+                <h3 className={styles.noteItemTitle}>
+                  {note.title || "Untitled Note"}
+                </h3>
+                <p className={styles.noteItemTags}>
+                  {note.tags.map((tag) => (
+                    <span key={tag} className={styles.noteTags}>
+                      {tag}
+                    </span>
+                  ))}
+                </p>
+                <p className={styles.noteItemDate}>
+                  {formatDate(note.last_edited)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {(!isTablet || selectedNote || isCreating) && (
+        <div className={styles.noteEditor}>
+          {isTablet && (
+            <div className={styles.noteControls}>
+              <div className={styles.noteNavigation}>
+                <button
+                  type="button"
+                  className={styles.backButton}
+                  onClick={cancelNote}
+                >
+                  <span>&lt;</span>
+                  <span>Go Back</span>
+                </button>
+              </div>
 
-              <div className={homeStyles.metaData}>
-                <div className={homeStyles.metaRow}>
-                  <label htmlFor="tags" className={homeStyles.metaLabel}>
-                    <img src={tagIcon} alt="Tag Icon" />
-                    Tags
-                  </label>
-                  <input
-                    className={homeStyles.tagsInput}
-                    type="text"
-                    placeholder="Add tags separated by commas (e.g. Work, Planning)"
-                    value={note.tags}
-                    onChange={(e) => setNote({ ...note, tags: e.target.value })}
-                  />
-                </div>
-
-                <div className={homeStyles.metaRow}>
-                  <p className={homeStyles.metaLabel}>
-                    <img src={clockIcon} alt="Clock Icon" />
-                    Last Edited
-                  </p>
-                  <p className={homeStyles.editStatus}>
-                    {selectedNote
-                      ? formatDate(note.lastEdited)
-                      : "Not yet saved"}
-                  </p>
-                </div>
+              <div className={styles.noteActions}>
+                <button
+                  type="button"
+                  className={styles.cancelButton}
+                  onClick={cancelNote}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className={styles.saveButton}
+                  onClick={saveNote}
+                >
+                  Save Note
+                </button>
               </div>
             </div>
-            <textarea
-              className={homeStyles.noteContent}
-              placeholder="Start typing your note here..."
-              value={note.content}
-              onChange={(e) => setNote({ ...note, content: e.target.value })}
-            />
-            <div className={homeStyles.noteActions}>
-              <button
-                onClick={saveNote}
-                className={homeStyles.saveButton}
-                type="button"
-              >
-                Save Note
-              </button>
-              <button
-                onClick={cancelNote}
-                className={homeStyles.cancelButton}
-                type="button"
-              >
-                Cancel
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <h1>No Notes</h1>
-          </>
-        )}
-      </div>
-      <div className={homeStyles.noteActionSidebar}></div>
+          )}
+
+          {selectedNote || isCreating ? (
+            <>
+              <div className={styles.noteInfo}>
+                <input
+                  type="text"
+                  placeholder="Enter a title..."
+                  className={styles.noteTitle}
+                  value={note.title}
+                  onChange={(e) => setNote({ ...note, title: e.target.value })}
+                />
+
+                <div className={styles.metaData}>
+                  <div className={styles.metaRow}>
+                    <label htmlFor="tags" className={styles.metaLabel}>
+                      <img src={tagIcon} alt="Tag Icon" />
+                      Tags
+                    </label>
+                    <input
+                      className={styles.tagsInput}
+                      type="text"
+                      placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                      value={note.tags}
+                      onChange={(e) =>
+                        setNote({ ...note, tags: e.target.value })
+                      }
+                    />
+                  </div>
+
+                  <div className={styles.metaRow}>
+                    <p className={styles.metaLabel}>
+                      <img src={clockIcon} alt="Clock Icon" />
+                      Last Edited
+                    </p>
+                    <p className={styles.editStatus}>
+                      {selectedNote
+                        ? formatDate(note.lastEdited)
+                        : "Not yet saved"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <textarea
+                className={styles.noteContent}
+                placeholder="Start typing your note here..."
+                value={note.content}
+                onChange={(e) => setNote({ ...note, content: e.target.value })}
+              />
+              <div className={styles.noteActions}>
+                <button
+                  onClick={saveNote}
+                  className={styles.saveButton}
+                  type="button"
+                >
+                  Save Note
+                </button>
+                <button
+                  onClick={cancelNote}
+                  className={styles.cancelButton}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <h1>No Notes</h1>
+            </>
+          )}
+        </div>
+      )}
+      {!isTablet && <div className={styles.noteActionSidebar}></div>}
     </div>
   );
 }

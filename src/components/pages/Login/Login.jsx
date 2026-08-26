@@ -1,4 +1,4 @@
-import loginStyles from "./Login.module.css";
+import styles from "./Login.module.css";
 import logo from "../../../assets/images/logo.svg";
 import googleIcon from "../../../assets/images/icon-google.svg";
 import hidePasswordIcon from "../../../assets/images/icon-hide-password.svg";
@@ -30,16 +30,16 @@ export default function Login() {
   };
 
   return (
-    <div className={loginStyles.container}>
-      <div className={loginStyles.loginCard}>
+    <div className={styles.container}>
+      <div className={styles.loginCard}>
         <img src={logo} alt="Note Logo" />
-        <div className={loginStyles.header}>
-          <h1 className={loginStyles.title}>Welcome to Note</h1>
-          <p className={loginStyles.subtitle}>Please log in to continue</p>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Welcome to Note</h1>
+          <p className={styles.subtitle}>Please log in to continue</p>
         </div>
-        <div className={loginStyles.form}>
-          <form className={loginStyles.loginForm} onSubmit={handleLogin}>
-            <div className={loginStyles.inputGroup}>
+        <div className={styles.form}>
+          <form className={styles.loginForm} onSubmit={handleLogin}>
+            <div className={styles.inputGroup}>
               <label htmlFor="email">Email Address</label>
               <input
                 type="email"
@@ -52,9 +52,9 @@ export default function Login() {
               />
             </div>
 
-            <div className={loginStyles.inputGroup}>
+            <div className={styles.inputGroup}>
               <label htmlFor="password">Password</label>
-              <div className={loginStyles.passwordInputWrapper}>
+              <div className={styles.passwordInputWrapper}>
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
@@ -65,7 +65,7 @@ export default function Login() {
                 />
                 <button
                   type="button"
-                  className={loginStyles.showPasswordBtn}
+                  className={styles.showPasswordBtn}
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   <img
@@ -76,20 +76,16 @@ export default function Login() {
               </div>
             </div>
 
-            <input
-              className={loginStyles.submitBtn}
-              type="submit"
-              value="Login"
-            />
+            <input className={styles.submitBtn} type="submit" value="Login" />
           </form>
         </div>
-        <div className={loginStyles.socialLogin}>
-          <p className={loginStyles.divider}>Or log in with:</p>
-          <button type="button" className={loginStyles.googleBtn}>
+        <div className={styles.socialLogin}>
+          <p className={styles.divider}>Or log in with:</p>
+          <button type="button" className={styles.googleBtn}>
             <img src={googleIcon} alt="Google" /> Google
           </button>
         </div>
-        <p className={loginStyles.signupLink}>
+        <p className={styles.signupLink}>
           No account yet? <a href="/signup">Sign up</a>
         </p>
       </div>

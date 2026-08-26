@@ -155,6 +155,10 @@
   border-bottom: 1px solid #e0e4ea;
 }
 
+.noteItem:last-child {
+  border: none;
+}
+
 .noteItemTags {
   display: flex;
   gap: 4px;
@@ -166,4 +170,59 @@
   border-radius: 4px;
   font-size: 14px;
   background-color: #e0e4ea;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 1024px) {
+  .noteControls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e4ea;
+  }
+
+  .noteSidebar {
+    padding: 24px 32px;
+  }
+
+  .noteListTitle {
+    margin-bottom: 16px;
+  }
+
+  .noteList {
+    margin: 0;
+  }
+
+  .noteItem {
+    padding: 8px;
+  }
+
+  .backButton {
+    border: none;
+    background: transparent;
+    display: flex;
+    gap: 3px;
+  }
+
+  .noteActions {
+    padding: 0;
+    border: none;
+    width: auto;
+
+    button {
+      background: transparent;
+      padding: 0;
+    }
+
+    .cancelButton {
+      color: #525866;
+    }
+
+    .saveButton {
+      color: #335cff;
+    }
+  }
 }

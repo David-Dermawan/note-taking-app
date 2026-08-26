@@ -32,3 +32,10 @@
   background: transparent;
   color: #71717a;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 28px 32px;
+    background-color: #f3f5f8;
+  }
+}

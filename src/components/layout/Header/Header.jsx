@@ -1,20 +1,29 @@
-import headerStyles from "./Header.module.css";
+import styles from "./Header.module.css";
 import settingsIcon from "../../../assets/images/icon-settings.svg";
 import { Link } from "react-router";
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import logoIcon from "../../../assets/images/logo.svg";
 
 export default function Header({ title }) {
+  const isTablet = useMediaQuery("(max-width: 1024px)");
   return (
-    <div className={headerStyles.container}>
-      <h1 className={headerStyles.title}>{title}</h1>
-      <div className={headerStyles.searchBar}>
-        <input
-          type="search"
-          placeholder="Search by title, content, or tags..."
-        />
-        <Link to="/settings" className={headerStyles.settingBtn}>
-          <img src={settingsIcon} alt="setting" />
-        </Link>
-      </div>
+    <div className={styles.container}>
+      {!isTablet ? (
+        <div className={styles.searchBar}>
+          <h1 className={styles.title}>{title}</h1>
+          <input
+            type="search"
+            placeholder="Search by title, content, or tags..."
+          />
+          <Link to="/settings" className={styles.settingBtn}>
+            <img src={settingsIcon} alt="setting" />
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <img src={logoIcon} alt="Note logo" />
+        </div>
+      )}
     </div>
   );
 }

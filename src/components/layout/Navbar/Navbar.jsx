@@ -1,4 +1,4 @@
-import navbarStyles from "./Navbar.module.css";
+import styles from "./Navbar.module.css";
 import logo from "../../../assets/images/logo.svg";
 import { Link } from "react-router";
 import homeIcon from "../../../assets/images/icon-home.svg";
@@ -6,12 +6,12 @@ import archiveIcon from "../../../assets/images/icon-archive.svg";
 
 export default function Navbar() {
   return (
-    <div className={navbarStyles.container}>
-      <nav className={navbarStyles.navigation}>
-        <div className={navbarStyles.logoContainer}>
-          <img src={logo} alt="Note Logo" className={navbarStyles.logo} />
+    <div className={styles.container}>
+      <nav className={styles.navigation}>
+        <div className={styles.logoContainer}>
+          <img src={logo} alt="Note Logo" className={styles.logo} />
         </div>
-        <ul className={navbarStyles.navList}>
+        <ul className={styles.navList}>
           <li>
             <Link to="/">
               <img src={homeIcon} alt="Home" />
