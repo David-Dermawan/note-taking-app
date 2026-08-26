@@ -151,16 +151,17 @@ export default function Home() {
               + Create New Note
             </button>
           )}
-          {isTablet && !isSearchOpen ? (
-            <h2 className={styles.noteListTitle}>{title}</h2>
-          ) : (
-            <div className={styles.searchBar}>
-              <input
-                type="search"
-                placeholder="Search by title, content, or tags..."
-              />
-            </div>
-          )}
+          {isTablet &&
+            (!isSearchOpen ? (
+              <h2 className={styles.noteListTitle}>{title}</h2>
+            ) : (
+              <div className={styles.searchBar}>
+                <input
+                  type="search"
+                  placeholder="Search by title, content, or tags..."
+                />
+              </div>
+            ))}
           <div className={styles.noteList}>
             {noteList.map((note) => (
               <div
@@ -196,8 +197,7 @@ export default function Home() {
                   className={styles.backButton}
                   onClick={cancelNote}
                 >
-                  <span>&lt;</span>
-                  <span>Go Back</span>
+                  &lt; Go Back
                 </button>
               </div>
 

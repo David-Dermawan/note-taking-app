@@ -203,8 +203,6 @@
   .backButton {
     border: none;
     background: transparent;
-    display: flex;
-    gap: 3px;
   }
 
   .noteActions {

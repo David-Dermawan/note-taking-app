@@ -37,6 +37,12 @@ export default function MobileNavbar({ onHome, onSearch, onTags }) {
             <span className={styles.navLabel}>Tags</span>
           </button>
         </li>
+        <li className={styles.item}>
+          <Link to="/settings" className={styles.navLink}>
+            <img src={archiveIcon} alt="Archive Icon" />
+            <span className={styles.navLabel}>Settings</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

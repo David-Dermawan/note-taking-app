@@ -9,15 +9,26 @@
 
 .navList {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
+  padding: 0;
+  width: 100%;
 }
 
 .item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
   list-style-type: none;
+  border-right: 1px solid black;
 }
 
-.navLink {
+.item:last-child {
+  border-right: none;
+}
+
+.navLink,
+button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,4 +40,10 @@
   img {
     width: 24px;
   }
+}
+
+.searchButton,
+.tagsButton {
+  border: none;
+  background: transparent;
 }

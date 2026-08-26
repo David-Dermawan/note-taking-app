@@ -9,15 +9,18 @@ export default function Header({ title }) {
   return (
     <div className={styles.container}>
       {!isTablet ? (
-        <div className={styles.searchBar}>
+        <div className={styles.headerContent}>
           <h1 className={styles.title}>{title}</h1>
-          <input
-            type="search"
-            placeholder="Search by title, content, or tags..."
-          />
-          <Link to="/settings" className={styles.settingBtn}>
-            <img src={settingsIcon} alt="setting" />
-          </Link>
+          <div className={styles.searchBar}>
+            <input
+              type="search"
+              className={styles.searchInput}
+              placeholder="Search by title, content, or tags..."
+            />
+            <Link to="/settings" className={styles.settingBtn}>
+              <img src={settingsIcon} alt="setting" />
+            </Link>
+          </div>
         </div>
       ) : (
         <div>
