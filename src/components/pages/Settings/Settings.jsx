@@ -35,7 +35,7 @@ export default function Settings() {
           </li>
 
           <li>
-            <button type="button">
+            <button type="button" className={styles.logoutButton}>
               <img src={logoutIcon} alt="Logout Icon" />
               <span>Logout</span>
               <span></span>

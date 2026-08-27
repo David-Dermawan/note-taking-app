@@ -21,6 +21,7 @@
   button,
   a {
     display: flex;
+    flex-direction: row;
     gap: 12px;
     padding: 8px;
     background: none;
