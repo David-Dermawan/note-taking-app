@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import { useOutletContext } from "react-router";
+import formatDate from "../../../utils/formatDate";
 
 export default function Home() {
   const { title, isSearchOpen, isTagView } = useOutletContext();
@@ -19,14 +20,7 @@ export default function Home() {
   const [selectedNote, setSelectedNote] = useState(null);
   const [noteList, setNoteList] = useState([]);
   const isTablet = useMediaQuery("(max-width: 1024px)");
-
-  function formatDate(date) {
-    return new Date(date).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  }
+  const tags = [...new Set(noteList.flatMap((note) => note.tags))];
 
   async function getNotes() {
     const { data, error } = await supabase
@@ -152,38 +146,57 @@ export default function Home() {
             </button>
           )}
           {isTablet &&
-            (!isSearchOpen ? (
-              <h2 className={styles.noteListTitle}>{title}</h2>
-            ) : (
+            (isSearchOpen ? (
               <div className={styles.searchBar}>
+                <h1 className={styles.title}>Search</h1>
                 <input
+                  className={styles.searchInput}
                   type="search"
                   placeholder="Search by title, content, or tags..."
                 />
               </div>
+            ) : isTagView ? (
+              <h1 className={styles.title}>Tags</h1>
+            ) : (
+              <h2 className={styles.noteListTitle}>{title}</h2>
             ))}
           <div className={styles.noteList}>
-            {noteList.map((note) => (
-              <div
-                key={note.id}
-                className={styles.noteItem}
-                onClick={() => selectNote(note)}
-              >
-                <h3 className={styles.noteItemTitle}>
-                  {note.title || "Untitled Note"}
-                </h3>
-                <p className={styles.noteItemTags}>
-                  {note.tags.map((tag) => (
-                    <span key={tag} className={styles.noteTags}>
-                      {tag}
-                    </span>
-                  ))}
-                </p>
-                <p className={styles.noteItemDate}>
-                  {formatDate(note.last_edited)}
-                </p>
+            {!isTagView ? (
+              noteList.map((note) => (
+                <div
+                  key={note.id}
+                  className={styles.noteItem}
+                  onClick={() => selectNote(note)}
+                >
+                  <h3 className={styles.noteItemTitle}>
+                    {note.title || "Untitled Note"}
+                  </h3>
+                  <p className={styles.noteItemTags}>
+                    {note.tags.map((tag) => (
+                      <span key={tag} className={styles.noteTags}>
+                        {tag}
+                      </span>
+                    ))}
+                  </p>
+                  <p className={styles.noteItemDate}>
+                    {formatDate(note.last_edited)}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className={styles.tagList}>
+                {tags.map((tag) => (
+                  <div className={styles.tagItem} key={tag}>
+                    <img
+                      src={tagIcon}
+                      alt="Tag Icon"
+                      className={styles.tagIcon}
+                    />
+                    {tag}
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </div>
       )}

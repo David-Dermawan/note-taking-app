@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   list-style-type: none;
-  border-right: 1px solid black;
+  border-right: 1px solid #f3f5f8;
 }
 
 .item:last-child {
