@@ -1,10 +1,10 @@
-import { Outlet, useLocation, useMatches } from "react-router";
+import { Outlet, useMatches, useNavigate } from "react-router";
 import Header from "../Header";
 import Navbar from "../Navbar";
 import styles from "./MainLayout.module.css";
 import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import useMediaQuery from "../../../hooks/useMediaQuery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function MainLayout() {
   const matches = useMatches();
@@ -14,14 +14,10 @@ export default function MainLayout() {
 
   const isTablet = useMediaQuery("(max-width: 1024px)");
 
-  const location = useLocation();
+  const navigate = useNavigate();
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isTagView, setIsTagView] = useState(false);
-
-  useEffect(() => {
-    setIsSearchOpen(false);
-    setIsTagView(false);
-  }, [location.pathname]);
 
   function handleHome() {
     setIsSearchOpen(false);
@@ -31,11 +27,13 @@ export default function MainLayout() {
   function handleSearch() {
     setIsSearchOpen(true);
     setIsTagView(false);
+    navigate("/");
   }
 
   function handleTags() {
     setIsTagView(true);
     setIsSearchOpen(false);
+    navigate("/");
   }
 
   return (
