@@ -9,11 +9,11 @@ import { useState } from "react";
 export default function MainLayout() {
   const matches = useMatches();
 
-  const currentRoute = matches[matches.length - 1];
-  const title = currentRoute.handle?.title || "";
+  const title =
+    [...matches].reverse().find((match) => match.handle?.title)?.handle.title ||
+    "";
 
   const isTablet = useMediaQuery("(max-width: 1024px)");
-
   const navigate = useNavigate();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);

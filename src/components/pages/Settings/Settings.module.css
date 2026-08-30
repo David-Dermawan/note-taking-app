@@ -14,8 +14,17 @@
   gap: 8px;
   padding: 0;
 
+  .changePasswordLink {
+    padding-bottom: 16px;
+  }
+
   li {
     list-style-type: none;
+  }
+
+  li:last-child {
+    padding-block: 16px;
+    border-top: 1px solid #e0e4ea;
   }
 
   button,
@@ -28,5 +37,16 @@
     border: none;
     text-decoration: none;
     color: black;
+  }
+}
+
+.settingsContent {
+  padding: 20px 32px;
+}
+
+@media (max-width: 1024px) {
+  .settingsPanel {
+    border: none;
+    width: 100%;
   }
 }

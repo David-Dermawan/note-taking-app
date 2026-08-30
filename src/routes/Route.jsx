@@ -3,6 +3,9 @@ import LoginPage from "../components/pages/Login";
 import MainLayout from "../components/layout/MainLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import Settings from "../components/pages/Settings";
+import Color from "../components/pages/Settings/Color";
+import Font from "../components/pages/Settings/Font/Font";
+import Password from "../components/pages/Settings/Password/Password";
 
 const routes = [
   {
@@ -35,6 +38,15 @@ const routes = [
             children: [
               {
                 path: "color",
+                element: <Color />,
+              },
+              {
+                path: "font",
+                element: <Font />,
+              },
+              {
+                path: "password",
+                element: <Password />,
               },
             ],
           },

@@ -1,0 +1,72 @@
+.colorSettings {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.back {
+  text-decoration: none;
+  color: #525866;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  font-size: 0.87rem;
+  font-weight: 400;
+}
+
+.themeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.themeOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid #e0e4ea;
+  border-radius: 12px;
+}
+
+.themeOption:has(input:checked) {
+  background-color: #f3f5f8;
+}
+
+.themeInfo {
+  display: flex;
+  gap: 16px;
+}
+
+.themeDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e4ea;
+  width: 40px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.themeIcon {
+  width: 24px;
+}
+
+.optionTitle {
+  font-weight: 500;
+}
